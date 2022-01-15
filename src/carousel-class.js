@@ -1,22 +1,24 @@
-import './style.css';
+import './carousel-style.css';
 
 class Carousel {
   constructor(imgArray) {
     this.imgArray = imgArray;
-    const circles = document.querySelector('#circles');
-    const carousel = document.querySelector('#carousel');
+    this.circles = document.querySelector('#circles');
+    this.slider = document.querySelector('#carousel');
+    this.circles.innerHTML = '';
+    this.slider.innerHTML = '';
     this.imgArray.forEach((image) => {
-      const newImage = new Image();
-      newImage.src = image;
-      carousel.append(newImage);
+      if (image) {
+        const newImage = new Image();
+        newImage.src = image;
+        this.slider.append(newImage);
 
-      const newCircle = document.createElement('i');
-      circles.append(newCircle);
+        const newCircle = document.createElement('i');
+        this.circles.append(newCircle);
+      }
     });
-    return {
-      slider: carousel,
-      circles: circles,
-    };
+    this.maxX = -60 * (imgArray.length - 2);
+    this.position = 0;
   }
 }
 
